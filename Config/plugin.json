@@ -1,0 +1,11 @@
+{
+	"name": "Surveys",
+	"type": "cakephp-plugin",
+	"description": "CakePHP Surveys Plugin",
+	"homepage": "http://github.com/maps90/CakePHP-surveys",
+	"license": "MIT",
+	"require": {
+		"php": ">=5.3.0",
+		"composer/installers": "*"
+	}
+}
