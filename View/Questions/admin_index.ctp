@@ -6,6 +6,8 @@
 			<th><?php echo $this->Paginator->sort('survey_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('type'); ?></th>
 			<th><?php echo $this->Paginator->sort('questions'); ?></th>
+			<th><?php echo $this->Paginator->sort('total_sequence'); ?></th>
+			<th><?php echo $this->Paginator->sort('weight'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -18,6 +20,8 @@
 		</td>
 		<td><?php echo h($question['Question']['type']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['questions']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['total_sequence']); ?>&nbsp;</td>
+		<td><?php echo h($question['Question']['weight']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['created']); ?>&nbsp;</td>
 		<td><?php echo h($question['Question']['modified']); ?>&nbsp;</td>
 		<td class="actions">
