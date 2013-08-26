@@ -9,8 +9,8 @@ class Question extends SurveysAppModel {
 	);
 
 	public $hasMany = array(
-		'Answer' => array(
-			'className' => 'Surveys.Answer',
+		'QuestionOption' => array(
+			'className' => 'Surveys.QuestionOption',
 		),
 	);
 

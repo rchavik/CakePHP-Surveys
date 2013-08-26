@@ -93,12 +93,4 @@ class SurveysController extends SurveysAppController {
 		$this->Session->setFlash(__('Survey was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-
-	public function admin_results($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid survey'));
-			$this->redirect(array('action' => 'index', 'admin' => true));
-		}
-		$this->set('surveys', $this->Survey->read(null, $id));
-	}
 }

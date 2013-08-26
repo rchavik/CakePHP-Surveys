@@ -9,9 +9,13 @@
 			'options' => array(
 				'essay' => 'Essay',
 				'rate' => 'Rate',
+				'multiple' => 'Multiple',
+				'checkbox' => 'Checkbox',
 			)
 		));
+		echo $this->Form->input('total_sequence');
 		echo $this->Form->input('questions');
+		echo $this->Form->input('weight');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
