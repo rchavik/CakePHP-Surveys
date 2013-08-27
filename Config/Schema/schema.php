@@ -39,7 +39,7 @@ class SurveysSchema extends CakeSchema {
 	public $submissions = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10, 'key' => 'primary'),
 		'user_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
-		'raw_data' => array('type' => 'string', 'null' => false, 'default' => NULL),
+		'raw_data' => array('type' => 'text', 'null' => false, 'default' => NULL),
 		'point' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'length' => 10),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),

@@ -10,7 +10,7 @@ class SubmissionDetail extends SurveysAppModel {
 			'foreignKey' => 'question_id',
 		),
 		'Submission' => array(
-			'className' => 'Surveys.SurveySubmission',
+			'className' => 'Surveys.Submission',
 			'foreignKey' => 'submission_id',
 		),
 	);
