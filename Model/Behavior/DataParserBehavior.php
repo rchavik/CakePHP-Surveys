@@ -32,6 +32,7 @@ class DataParserBehavior extends ModelBehavior  {
 				$extracts = Hash::extract($data['answer'], '{n}');
 				foreach ($extracts as $records) {
 					foreach ($records as $qoption => $record) {
+						$text = $this->_getDetailOption($qoption);
 						if ($record['Checked'] == 1) {
 							$temp = array(
 								'SubmissionDetail' => array(
@@ -39,7 +40,7 @@ class DataParserBehavior extends ModelBehavior  {
 									'submission_id' => $sid,
 									'sequence_id' => $record['Sequence'],
 									'value' => $qoption,
-									'text' => $record['Checked'],
+									'text' => $text['QuestionOption']['options'],
 									'point' => $record['Quantity'],
 								)
 							);
@@ -48,12 +49,13 @@ class DataParserBehavior extends ModelBehavior  {
 					}
 				}
 			} else if ($data['type'] == 'essay') {
-				foreach ($data['answer'] as $record) { 
+				foreach ($data['answer'] as $eid => $record) {
 					if (!empty($record)) {
 						$temp = array(
 							'SubmissionDetail' => array(
 								'question_id' => $key,
 								'submission_id' => $sid,
+								'value' => $eid,
 								'text' => $record,
 								'point' => 1
 							)
@@ -73,11 +75,32 @@ class DataParserBehavior extends ModelBehavior  {
 					'SubmissionDetail' => array(
 						'question_id' => $key,
 						'submission_id' => $sid,
+						'value' => $option['QuestionOption']['id'],
+						'text' => $option['QuestionOption']['options'],
 						'point' => $point,
-						'value' => $option['QuestionOption']['options'],
 					)
 				);
 				$Model->SubmissionDetail->saveAll($temp);
+			} else if ($data['type'] == 'rate') {
+				foreach ($data['answer'] as $rid => $record) {
+					$option = ClassRegistry::init('Surveys.QuestionOption')->find('first', array(
+						'recursive' => -1,
+						'conditions' => array(
+							'id' => $record
+						)
+					));
+					$temp = array(
+						'SubmissionDetail' => array(
+							'question_id' => $key,
+							'submission_id' => $sid,
+							'value' => $rid,
+							'text' => $option['QuestionOption']['options'],
+							'point' => 0,
+						)
+					);
+					$Model->SubmissionDetail->saveAll($temp);
+				}
+
 			}
 		}
 		$this->_calculatePoints($Model, $sid);
@@ -95,5 +118,15 @@ class DataParserBehavior extends ModelBehavior  {
 		}
 		$Model->id = $id;
 		$Model->saveField('point', $point);
+	}
+
+	protected function _getDetailOption ($id) {
+		$data = ClassRegistry::init('Surveys.QuestionOption')->find('first', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'id' => $id
+			)
+		));
+		return $data;
 	}
 }
