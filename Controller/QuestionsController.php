@@ -18,21 +18,6 @@ class QuestionsController extends SurveysAppController {
 	}
 
 /**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_view($id = null) {
-		if (!$this->Question->exists($id)) {
-			throw new NotFoundException(__('Invalid question'));
-		}
-		$options = array('conditions' => array('Question.' . $this->Question->primaryKey => $id));
-		$this->set('question', $this->Question->find('first', $options));
-	}
-
-/**
  * admin_add method
  *
  * @return void
@@ -74,6 +59,7 @@ class QuestionsController extends SurveysAppController {
 			$this->request->data = $this->Question->find('first', $options);
 		}
 		$surveys = $this->Question->Survey->find('list');
+		$this->set('question', $this->Question->find('first', $options));
 		$this->set(compact('surveys'));
 	}
 
