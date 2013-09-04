@@ -55,6 +55,7 @@ class DataParserBehavior extends ModelBehavior  {
 							'SubmissionDetail' => array(
 								'question_id' => $key,
 								'submission_id' => $sid,
+								'sequence_id' => 1,
 								'value' => $eid,
 								'text' => $record,
 								'point' => 1
@@ -75,6 +76,7 @@ class DataParserBehavior extends ModelBehavior  {
 					'SubmissionDetail' => array(
 						'question_id' => $key,
 						'submission_id' => $sid,
+						'sequence_id' => $option['QuestionOption']['sequence_id'],
 						'value' => $option['QuestionOption']['id'],
 						'text' => $option['QuestionOption']['options'],
 						'point' => $point,
@@ -93,7 +95,8 @@ class DataParserBehavior extends ModelBehavior  {
 						'SubmissionDetail' => array(
 							'question_id' => $key,
 							'submission_id' => $sid,
-							'value' => $rid,
+							'sequence_id' => $rid,
+							'value' => $option['QuestionOption']['id'],
 							'text' => $option['QuestionOption']['options'],
 							'point' => 0,
 						)
