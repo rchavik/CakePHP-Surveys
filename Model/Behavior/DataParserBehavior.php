@@ -71,7 +71,7 @@ class DataParserBehavior extends ModelBehavior  {
 						'id' => $data['answer']
 					),
 				));
-				$point = empty($points['QuestionOption']['point']) ?: 0 ;
+				$point = !empty($option['QuestionOption']['point']) ? $option['QuestionOption']['point']: 0 ;
 				$temp = array(
 					'SubmissionDetail' => array(
 						'question_id' => $key,
@@ -91,14 +91,15 @@ class DataParserBehavior extends ModelBehavior  {
 							'id' => $record
 						)
 					));
+					$point = !empty($option['QuestionOption']['point']) ? $option['QuestionOption']['point']: 0 ;
 					$temp = array(
 						'SubmissionDetail' => array(
 							'question_id' => $key,
 							'submission_id' => $sid,
 							'sequence_id' => $rid,
-							'value' => $option['QuestionOption']['id'],
+							'value' => $rid,
 							'text' => $option['QuestionOption']['options'],
-							'point' => 0,
+							'point' => $point,
 						)
 					);
 					$Model->SubmissionDetail->saveAll($temp);
