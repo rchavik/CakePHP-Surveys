@@ -18,6 +18,7 @@ class Submission extends SurveysAppModel {
 	public $hasMany = array(
 		'SubmissionDetail' => array(
 			'className' => 'Surveys.SubmissionDetail',
+			'dependent' => true
 		)
 	);
 }

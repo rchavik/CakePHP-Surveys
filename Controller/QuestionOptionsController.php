@@ -67,7 +67,7 @@ class QuestionOptionsController extends SurveysAppController {
 			if ($this->QuestionOption->save($this->request->data)) {
 				$id = $this->request->data['QuestionOption']['question_id'];
 				$this->Session->setFlash(__('The question option has been saved'));
-				$this->redirect(array('controller' => 'questions', 'action' => 'view', $id));
+				$this->redirect(array('controller' => 'questions', 'action' => 'edit', $id));
 			} else {
 				$this->Session->setFlash(__('The question option could not be saved. Please, try again.'));
 			}
