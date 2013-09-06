@@ -41,6 +41,8 @@ class SurveysSchema extends CakeSchema {
 		'user_id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 10),
 		'raw_data' => array('type' => 'text', 'null' => false, 'default' => NULL),
 		'point' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'length' => 10),
+		'status' => array('type' => 'boolean', 'null' => true, 'default' => 0),
+		'valid' => array('type' => 'boolean', 'null' => true, 'default' => 1),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'indexes' => array(
