@@ -6,9 +6,9 @@ use Cake\ORM\Table;
 
 class QuestionOptionsTable extends Table {
 
-	public function initialize(array $config)
-	{
-		parent::initialize($config);
-		$this->belongsTo('Surveys.Questions');
-	}
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+        $this->belongsTo('Surveys.Questions');
+    }
 }
