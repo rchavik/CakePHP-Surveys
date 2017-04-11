@@ -36,7 +36,7 @@ $this->end();
 $this->append('tab-content');
     echo $this->Html->tabStart('question-option');
         echo $this->Form->input('question_id', ['options' => $questions, 'empty' => true]);
-        echo $this->Form->input('sequence_id');
+        echo $this->Form->input('sequence_id', ['type' => 'text']);
         echo $this->Form->input('options');
         echo $this->Form->input('weight');
         echo $this->Form->input('point');

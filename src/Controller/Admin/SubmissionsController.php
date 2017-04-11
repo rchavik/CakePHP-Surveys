@@ -2,6 +2,7 @@
 
 namespace Surveys\Controller\Admin;
 
+use Cake\Event\Event;
 use Croogo\Core\Controller\Admin\AppController as CroogoController;
 
 /**
@@ -26,6 +27,11 @@ class SubmissionsController extends CroogoController
      */
     public function view($id = null)
     {
+        $this->Crud->listener('relatedModels')->relatedModels(true);
+        $this->Crud->on('beforeFind', function(Event $event) {
+            $event->subject()->query
+                ->contain(['Users', 'SubmissionDetails']);
+        });
         return $this->Crud->execute();
     }
 

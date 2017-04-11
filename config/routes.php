@@ -9,4 +9,8 @@ Router::plugin('Surveys', ['path' => '/'], function (RouteBuilder $route) {
             $route->fallbacks('DashedRoute');
         });
     });
+
+    $route->scope('/surveys', [], function(RouteBuilder $route) {
+        $route->fallbacks('DashedRoute');
+    });
 });

@@ -3,13 +3,7 @@
 $this->extend('Croogo/Core./Common/admin_index');
 $this->Breadcrumbs->add(__('Submissions'), ['action' => 'index']);
 
-$this->append('action-buttons');
-    echo $this->Croogo->adminAction(__('New Submission'), ['action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Users'), ['controller' => 'Users', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New User'), ['controller' => 'Users', 'action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Submission Details'), ['controller' => 'SubmissionDetails', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New Submission Detail'), ['controller' => 'SubmissionDetails', 'action' => 'add']);
-$this->end();
+$this->set('showActions', false);
 
 $this->append('table-heading');
 ?>

@@ -8,14 +8,7 @@ $this->Breadcrumbs
     $this->Breadcrumbs->add($submission->id, $this->request->here());
 
 $this->append('action-buttons');
-    echo $this->Croogo->adminAction(__('Edit Submission'), ['action' => 'edit', $submission->id]);
-    echo $this->Croogo->adminAction(__('Delete Submission'), ['action' => 'delete', $submission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $submission->id)]);
     echo $this->Croogo->adminAction(__('List Submissions'), ['action' => 'index']);
-    echo $this->Croogo->adminAction(__('New Submission'), ['action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Users'), ['controller' => 'Users', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New User'), ['controller' => 'Users', 'action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Submission Details'), ['controller' => 'SubmissionDetails', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New Submission Detail'), ['controller' => 'SubmissionDetails', 'action' => 'add']);
 $this->end();
 
 $this->append('main');
@@ -60,7 +53,7 @@ $this->append('main');
     <div class="related">
         <h4><?= __('Related Submission Details') ?></h4>
         <?php if (!empty($submission->submission_details)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table class="table table-sm">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Question Id') ?></th>
