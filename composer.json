@@ -1,12 +1,22 @@
 {
-	"name": "rchavik/croogo-surveys",
-	"type": "cakephp-plugin",
-	"description": "Croogo Survey Plugin",
-	"homepage": "http://github.com/rchavik/Croogo-surveys",
-	"license": "MIT",
-	"require": {
-		"php": ">=5.6.0",
-		"croogo/croogo": "3.0.x-dev"
-	}
+    "name": "rchavik/croogo-surveys",
+    "type": "cakephp-plugin",
+    "description": "Croogo Survey Plugin",
+    "homepage": "http://github.com/rchavik/Croogo-surveys",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.6.0",
+        "croogo/croogo": "3.0.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Surveys\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Surveys\\Test\\": "tests",
+            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+        }
+    }
 }
-
