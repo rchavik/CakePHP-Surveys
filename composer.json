@@ -1,12 +1,12 @@
 {
-	"name": "maps90/cakephp-surveys",
+	"name": "rchavik/croogo-surveys",
 	"type": "cakephp-plugin",
-	"description": "CakePHP Surveys Plugin",
-	"homepage": "http://github.com/maps90/CakePHP-surveys",
+	"description": "Croogo Survey Plugin",
+	"homepage": "http://github.com/rchavik/Croogo-surveys",
 	"license": "MIT",
 	"require": {
-		"php": ">=5.3.0",
-		"composer/installers": '*'
+		"php": ">=5.6.0",
+		"croogo/croogo": "3.0.x-dev"
 	}
 }
 
