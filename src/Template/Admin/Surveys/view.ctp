@@ -37,6 +37,34 @@ $this->append('main');
             <td><?= h($survey->modified) ?></td>
         </tr>
     </table>
+    <div class="related">
+        <?php if (!empty($survey->questions)): ?>
+        <h4><?= __('Related Questions') ?></h4>
+        <table class="table table-sm">
+            <tr>
+                <th>Question</th>
+                <th>Type</th>
+                <th>Weight</th>
+                <th>Options</th>
+            </tr>
+            <?php foreach ($survey->questions as $question): ?>
+            <tr>
+                <td><?= h($question->questions) ?></td>
+                <td><?= h($question->type) ?></td>
+                <td><?= h($question->weight) ?></td>
+                <td>
+                    <ul>
+                    <?php foreach ($question->question_options as $qoptions): ?>
+                        <li><?= h($qoptions->options) ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
 </div>
 <?php
+
 $this->end();

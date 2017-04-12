@@ -2,6 +2,7 @@
 
 namespace Surveys\Controller\Admin;
 
+use Cake\Event\Event;
 use Croogo\Core\Controller\Admin\AppController as CroogoController;
 
 /**
@@ -26,6 +27,12 @@ class SurveysController extends CroogoController
      */
     public function view($id = null)
     {
+        $this->Crud->on('beforeFind', function(Event $event) use ($id) {
+            $event->subject()->query
+                ->find('surveyQuestions', [
+                    'id' => $id,
+                ]);
+        });
         return $this->Crud->execute();
     }
 

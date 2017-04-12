@@ -26,6 +26,14 @@ class QuestionsController extends CroogoController
                 $survey = $this->Questions->Surveys->get($surveyId);
                 $this->set(compact('survey'));
             }
+
+            if (!$this->request->query('sort')) {
+                $event->subject()->query
+                    ->order([
+                        'survey_id' => 'desc',
+                        'weight' => 'asc',
+                    ]);
+            }
         });
 
         return $this->Crud->execute();
@@ -42,6 +50,14 @@ class QuestionsController extends CroogoController
                     'Surveys',
                     'QuestionOptions',
                 ]);
+        });
+
+        $this->Crud->on('afterFind', function(Event $event) {
+            $surveyId = $event->subject()->entity->get('survey_id');
+            if ($surveyId) {
+                $survey = $this->Questions->Surveys->get($surveyId);
+                $this->set(compact('survey'));
+            }
         });
         return $this->Crud->execute();
     }

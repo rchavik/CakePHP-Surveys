@@ -2,6 +2,18 @@
 
 $this->extend('Croogo/Core./Common/admin_view');
 
+$this->Breadcrumbs->add(__('Surveys'), ['controller' => 'Surveys', 'action' => 'index']);
+
+$addUrl = ['action' => 'add'];
+if (isset($survey)):
+    $this->Breadcrumbs->add($survey->title, [
+        'controller' => 'Surveys',
+        'action' => 'view',
+        $survey->id,
+    ]);
+    $addUrl['survey_id'] = $survey->id;
+endif;
+
 $this->Breadcrumbs
     ->add(__d('croogo', 'Questions'), ['action' => 'index']);
 
@@ -10,8 +22,7 @@ $this->Breadcrumbs
 $this->append('action-buttons');
     echo $this->Croogo->adminAction(__('Edit Question'), ['action' => 'edit', $question->id]);
     echo $this->Croogo->adminAction(__('Delete Question'), ['action' => 'delete', $question->id], ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]);
-    echo $this->Croogo->adminAction(__('List Questions'), ['action' => 'index']);
-    echo $this->Croogo->adminAction(__('New Question'), ['action' => 'add']);
+    echo $this->Croogo->adminAction(__('New Question'), $addUrl);
 $this->end();
 
 $this->append('main');
