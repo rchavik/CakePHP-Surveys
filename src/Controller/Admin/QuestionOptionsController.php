@@ -2,6 +2,7 @@
 
 namespace Surveys\Controller\Admin;
 
+use Cake\Event\Event;
 use Croogo\Core\Controller\Admin\AppController as CroogoController;
 
 /**
@@ -13,12 +14,43 @@ class QuestionOptionsController extends CroogoController
 {
 
     /**
+     * implementedEvents method
+     */
+    public function implementedEvents()
+    {
+        return parent::implementedEvents() + [
+            'Crud.beforeRedirect' => 'beforeCrudRedirect',
+        ];
+    }
+
+    /**
      * Index method
      */
     public function index()
     {
         $this->Crud->listener('relatedModels')->relatedModels(true);
+
+        $this->Crud->on('afterPaginate', function(Event $event) {
+            $questionId = $this->request->query('question_id');
+            if ($questionId) {
+                $question = $this->QuestionOptions->Questions->get($questionId);
+                $this->set(compact('question'));
+            }
+
+            if (isset($question->survey_id)) {
+                $survey = $this->QuestionOptions->Questions->Surveys->get($question->survey_id);
+                $this->set(compact('survey'));
+            }
+        });
         return $this->Crud->execute();
+    }
+
+    public function beforeCrudRedirect(Event $event)
+    {
+        $entity = $event->subject()->entity;
+        if ($entity->has('question_id')) {
+            $event->subject()->url['question_id'] = $entity->get('question_id');
+        }
     }
 
     /**

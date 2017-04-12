@@ -1,12 +1,34 @@
 <?php
 
 $this->extend('Croogo/Core./Common/admin_index');
-$this->Breadcrumbs->add(__('Question Options'), ['action' => 'index']);
+
+$addUrl = [
+    'controller' => 'QuestionOptions',
+    'action' => 'add',
+];
+
+if (isset($survey)):
+    $this->Breadcrumbs->add(__('Surveys'), [
+        'controller' => 'Surveys', 'action' => 'index',
+    ]);
+    $this->Breadcrumbs->add($survey->title, [
+        'controller' => 'Questions',
+        'action' => 'index',
+        'survey_id' => $survey->id,
+    ]);
+endif;
+
+if (isset($question)):
+    $this->Breadcrumbs->add($question->questions, [
+        'controller' => 'Questions', 'action' => 'view', $question->id,
+    ]);
+    $addUrl['question_id'] = $question->id;
+endif;
+
+$this->Breadcrumbs->add(__('Question Options'), $this->request->here());
 
 $this->append('action-buttons');
-    echo $this->Croogo->adminAction(__('New Question Option'), ['action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Questions'), ['controller' => 'Questions', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New Question'), ['controller' => 'Questions', 'action' => 'add']);
+    echo $this->Croogo->adminAction(__('New Question Option'), $addUrl);
 $this->end();
 
 $this->append('table-heading');
@@ -35,7 +57,7 @@ $this->append('table-body');
         <?php $actions = []; ?>
     <tr>
         <td><?= $this->Number->format($questionOption->id) ?></td>
-        <td><?= $questionOption->has('question') ? $this->Html->link($questionOption->question->id, ['controller' => 'Questions', 'action' => 'view', $questionOption->question->id]) : '' ?></td>
+        <td><?= $questionOption->has('question') ? $this->Html->link($questionOption->question->questions, ['controller' => 'Questions', 'action' => 'view', $questionOption->question->id]) : '' ?></td>
         <td><?= $this->Number->format($questionOption->sequence_id) ?></td>
         <td><?= h($questionOption->options) ?></td>
         <td><?= $this->Number->format($questionOption->weight) ?></td>

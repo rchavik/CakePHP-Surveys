@@ -9,9 +9,11 @@ $this->Breadcrumbs
 
 $this->append('action-buttons');
     echo $this->Croogo->adminAction(__('Edit Survey'), ['action' => 'edit', $survey->id]);
-    echo $this->Croogo->adminAction(__('Delete Survey'), ['action' => 'delete', $survey->id], ['confirm' => __('Are you sure you want to delete # {0}?', $survey->id)]);
-    echo $this->Croogo->adminAction(__('List Surveys'), ['action' => 'index']);
-    echo $this->Croogo->adminAction(__('New Survey'), ['action' => 'add']);
+    echo $this->Croogo->adminAction(__('New Question'), [
+        'controller' => 'Questions',
+        'action' => 'add',
+        'survey_id' => $survey->id,
+    ]);
 $this->end();
 
 $this->append('main');

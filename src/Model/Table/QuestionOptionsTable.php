@@ -11,6 +11,16 @@ class QuestionOptionsTable extends Table {
         parent::initialize($config);
         $this->addBehavior('Timestamp');
         $this->addBehavior('Search.Search');
+        $this->addBehavior('ADmad/Sequence.Sequence', [
+            'order' => 'weight',
+            'scope' => ['question_id'],
+        ]);
+        $this->addBehavior('CounterCache', [
+            'Questions' => ['total_sequence'],
+        ]);
         $this->belongsTo('Surveys.Questions');
+
+        $this->searchManager()
+            ->value('question_id');
     }
 }

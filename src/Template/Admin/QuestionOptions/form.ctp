@@ -36,10 +36,10 @@ $this->end();
 $this->append('tab-content');
     echo $this->Html->tabStart('question-option');
         echo $this->Form->input('question_id', ['options' => $questions, 'empty' => true]);
-        echo $this->Form->input('sequence_id', ['type' => 'text']);
         echo $this->Form->input('options');
-        echo $this->Form->input('weight');
-        echo $this->Form->input('point');
+        echo $this->Form->input('point', [
+            'default' => 1,
+        ]);
     echo $this->Html->tabEnd();
     echo $this->Croogo->adminTabs();
 $this->end();

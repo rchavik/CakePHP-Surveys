@@ -12,10 +12,6 @@ $this->append('action-buttons');
     echo $this->Croogo->adminAction(__('Delete Question'), ['action' => 'delete', $question->id], ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]);
     echo $this->Croogo->adminAction(__('List Questions'), ['action' => 'index']);
     echo $this->Croogo->adminAction(__('New Question'), ['action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Surveys'), ['controller' => 'Surveys', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New Survey'), ['controller' => 'Surveys', 'action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Question Options'), ['controller' => 'QuestionOptions', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New Question Option'), ['controller' => 'QuestionOptions', 'action' => 'add']);
 $this->end();
 
 $this->append('main');
@@ -58,7 +54,7 @@ $this->append('main');
     <div class="related">
         <h4><?= __('Related Question Options') ?></h4>
         <?php if (!empty($question->question_options)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table class="table table-sm">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Question Id') ?></th>

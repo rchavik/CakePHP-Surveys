@@ -2,6 +2,7 @@
 
 namespace Surveys\Controller\Admin;
 
+use Cake\Event\Event;
 use Croogo\Core\Controller\Admin\AppController as CroogoController;
 
 /**
@@ -18,6 +19,15 @@ class QuestionsController extends CroogoController
     public function index()
     {
         $this->Crud->listener('relatedModels')->relatedModels(true);
+
+        $this->Crud->on('beforePaginate', function(Event $event) {
+            $surveyId = $this->request->query('survey_id');
+            if ($surveyId) {
+                $survey = $this->Questions->Surveys->get($surveyId);
+                $this->set(compact('survey'));
+            }
+        });
+
         return $this->Crud->execute();
     }
 
@@ -26,6 +36,13 @@ class QuestionsController extends CroogoController
      */
     public function view($id = null)
     {
+        $this->Crud->on('beforeFind', function(Event $event) {
+            $event->subject()->query
+                ->contain([
+                    'Surveys',
+                    'QuestionOptions',
+                ]);
+        });
         return $this->Crud->execute();
     }
 
@@ -42,6 +59,13 @@ class QuestionsController extends CroogoController
      */
     public function edit($id = null)
     {
+        $this->Crud->on('afterFind', function(Event $event) {
+            $surveyId = $event->subject()->entity->survey_id;
+            if ($surveyId) {
+                $survey = $this->Questions->Surveys->get($surveyId);
+                $this->set(compact('survey'));
+            }
+        });
         return $this->Crud->execute();
     }
 

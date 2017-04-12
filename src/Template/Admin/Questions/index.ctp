@@ -1,17 +1,28 @@
 <?php
 
 $this->extend('Croogo/Core./Common/admin_index');
-$this->Breadcrumbs->add(__('Questions'), ['action' => 'index']);
+
+$this->Breadcrumbs->add(__('Surveys'), ['controller' => 'Surveys', 'action' => 'index']);
+
+$addUrl = ['action' => 'add'];
+if (isset($survey)) {
+    $this->Breadcrumbs->add($survey->title, [
+        'controller' => 'Surveys',
+        'action' => 'view',
+        $survey->id,
+    ]);
+    $addUrl['survey_id'] = $survey->id;
+}
+
+$this->Breadcrumbs->add(__('Questions'), $this->request->here());
 
 $this->append('action-buttons');
-    echo $this->Croogo->adminAction(__('New Question'), ['action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Surveys'), ['controller' => 'Surveys', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New Survey'), ['controller' => 'Surveys', 'action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Question Options'), ['controller' => 'QuestionOptions', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New Question Option'), ['controller' => 'QuestionOptions', 'action' => 'add']);
+    echo $this->Croogo->adminAction(__('New Question'), $addUrl);
+    echo $this->Croogo->adminAction(__('List Surveys'), ['controller' => 'Surveys', 'action' => 'index']);
 $this->end();
 
 $this->append('table-heading');
+
 ?>
 <thead>
     <tr>
