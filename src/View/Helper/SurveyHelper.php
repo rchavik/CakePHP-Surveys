@@ -3,6 +3,7 @@
 namespace Surveys\View\Helper;
 
 use Cake\ORM\Entity;
+use Cake\Utility\Hash;
 use Cake\View\View;
 use Cake\View\Helper;
 use Surveys\Model\Entity\Survey;
@@ -30,18 +31,17 @@ class SurveyHelper extends Helper {
             ];
         }
 
-/*
         if ($question->type == 'checkbox') {
-            $question ='<legend>'.$query['Question']['questions'].'</legend>';
-            $data = Hash::extract($query['QuestionOption'], '{n}.options');
+            $data = Hash::extract($question->question_options, '{n}.options');
             $value = array_combine($data, $data);
             $options = array(
-                'label' => false,
+                'label' => $question->questions,
                 'multiple' => 'checkbox',
                 'options' => $value,
             );
         }
 
+/*
         if ($question->type == 'essay') {
             $options = array(
                 'label' => false,
