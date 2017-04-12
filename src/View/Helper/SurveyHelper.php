@@ -41,13 +41,11 @@ class SurveyHelper extends Helper {
             );
         }
 
-/*
         if ($question->type == 'essay') {
             $options = array(
-                'label' => false,
+                'label' => $question->questions,
             );
         }
-*/
 
         $userId = $this->request->session()->read('Auth.User.id');
         $userId = $userId ?: 1; // uniqid();
