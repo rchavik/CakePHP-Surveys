@@ -14,6 +14,20 @@ class QuestionsController extends CroogoController
 {
 
     /**
+     * Initialize method
+     */
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Crud->config('actions.moveUp', [
+            'className' => 'Croogo/Core.Admin/MoveUp',
+        ]);
+        $this->Crud->config('actions.moveDown', [
+            'className' => 'Croogo/Core.Admin/MoveDown',
+        ]);
+    }
+
+    /**
      * Index method
      */
     public function index()

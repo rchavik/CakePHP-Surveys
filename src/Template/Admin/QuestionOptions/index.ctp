@@ -66,6 +66,22 @@ $this->append('table-body');
         <td><?= h($questionOption->modified) ?></td>
 <?php
         $actions[] = $this->Croogo->adminRowActions($questionOption->id);
+
+        $actions[] = $this->Croogo->adminRowAction('', [
+            'action' => 'moveUp',
+            $questionOption->id,
+        ], [
+            'icon' => $this->Theme->getIcon('move-up'),
+            'method' => 'post',
+        ]);
+
+        $actions[] = $this->Croogo->adminRowAction('', [
+            'action' => 'moveDown',
+            $questionOption->id,
+        ], [
+            'icon' => $this->Theme->getIcon('move-down'),
+            'method' => 'post',
+        ]);
         $actions[] = $this->Croogo->adminRowAction('', ['action' => 'view', $questionOption->id], ['icon' => 'read']);
         $actions[] = $this->Croogo->adminRowAction('', ['action' => 'edit', $questionOption->id], ['icon' => 'update']);
         $actions[] = $this->Croogo->adminRowAction('', ['action' => 'delete', $questionOption->id], ['icon' => 'delete']);

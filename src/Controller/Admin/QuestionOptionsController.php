@@ -14,6 +14,20 @@ class QuestionOptionsController extends CroogoController
 {
 
     /**
+     * Initialize method
+     */
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Crud->config('actions.moveUp', [
+            'className' => 'Croogo/Core.Admin/MoveUp',
+        ]);
+        $this->Crud->config('actions.moveDown', [
+            'className' => 'Croogo/Core.Admin/MoveDown',
+        ]);
+    }
+
+    /**
      * implementedEvents method
      */
     public function implementedEvents()
@@ -48,7 +62,8 @@ class QuestionOptionsController extends CroogoController
     public function beforeCrudRedirect(Event $event)
     {
         $entity = $event->subject()->entity;
-        if ($entity->has('question_id')) {
+        if ($entity->has('question_id') && is_array($event->subject()->url)) {
+            $this->log($event->subject()->url);
             $event->subject()->url['question_id'] = $entity->get('question_id');
         }
     }
