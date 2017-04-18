@@ -46,6 +46,9 @@ class InitialMigration extends AbstractMigration
 			->create();
 
 		$this->table('submissions')
+			->addColumn('survey_id', 'integer', [
+				'null' => false, 'default' => NULL, 'length' => 10
+			])
 			->addColumn('user_id', 'integer', [
 				'null' => false, 'default' => NULL, 'length' => 10,
 			])

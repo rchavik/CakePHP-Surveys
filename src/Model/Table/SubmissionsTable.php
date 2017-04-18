@@ -15,6 +15,7 @@ class SubmissionsTable extends Table {
         $this->addBehavior('Search.Search');
         $this->addBehavior('Surveys.DataParser');
         $this->belongsTo('Users');
+        $this->belongsTo('Surveys.Surveys');
         $this->hasMany('Surveys.SubmissionDetails');
     }
 

@@ -93,6 +93,10 @@ class SurveyHelper extends Helper {
     public function render(Survey $survey)
     {
         $out = $this->Html->tag('h3', $survey->title);
+        $out .= $this->Form->input('survey_id', [
+            'type' => 'hidden',
+            'value' => $survey->id,
+        ]);
         $questions = [];
         foreach ($survey->questions as $i => $question) {
             $questions[] = $this->question($i, $question);

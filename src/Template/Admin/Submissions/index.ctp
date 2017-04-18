@@ -10,6 +10,7 @@ $this->append('table-heading');
 <thead>
     <tr>
         <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('survey_id') ?></th>
         <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
         <th scope="col"><?= $this->Paginator->sort('point') ?></th>
         <th scope="col"><?= $this->Paginator->sort('status') ?></th>
@@ -23,13 +24,13 @@ $this->append('table-heading');
 $this->end();
 
 $this->append('table-body');
-
 ?>
 <tbody>
     <?php foreach ($submissions as $submission): ?>
         <?php $actions = []; ?>
     <tr>
         <td><?= $this->Number->format($submission->id) ?></td>
+        <td><?= $submission->has('survey') ? $this->Html->link($submission->survey->title, ['controller' => 'Surveys', 'action' => 'view', $submission->survey->id]) : '' ?></td>
         <td><?= $submission->has('user') ? $this->Html->link($submission->user->name, ['controller' => 'Users', 'action' => 'view', $submission->user->id]) : '' ?></td>
         <td><?= $this->Number->format($submission->point) ?></td>
         <td><?= h($submission->status) ?></td>
