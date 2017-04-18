@@ -62,9 +62,11 @@ class QuestionOptionsController extends CroogoController
     public function beforeCrudRedirect(Event $event)
     {
         $entity = $event->subject()->entity;
-        if ($entity->has('question_id') && is_array($event->subject()->url)) {
-            $this->log($event->subject()->url);
+        $referer = $this->request->referer();
+        if (!$referer && $entity->has('question_id') && is_array($event->subject()->url)) {
             $event->subject()->url['question_id'] = $entity->get('question_id');
+        } else {
+            $event->subject()->url = $referer;
         }
     }
 
@@ -73,6 +75,14 @@ class QuestionOptionsController extends CroogoController
      */
     public function view($id = null)
     {
+        $this->Crud->listener('relatedModels')->relatedModels(true);
+        $this->Crud->on('beforeFind', function(Event $event) {
+            $event->subject()->query
+                ->contain([
+                    'Questions',
+                    'Questions.Surveys',
+                ]);
+        });
         return $this->Crud->execute();
     }
 

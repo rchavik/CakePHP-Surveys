@@ -2,18 +2,41 @@
 
 $this->extend('Croogo/Core./Common/admin_view');
 
+if ($questionOption->has('question') && $questionOption->question->has('survey')):
+    $this->Breadcrumbs->add('Surveys', [
+        'controller' => 'Surveys',
+    ]);
+    $this->Breadcrumbs->add($this->Text->truncate($questionOption->question->survey->title, 10), [
+        'controller' => 'Surveys',
+        'action' => 'view',
+        $questionOption->question->survey_id,
+    ], [
+        'data-title' => $questionOption->question->survey->title,
+    ]);
+    $this->Breadcrumbs->add('Questions', [
+        'controller' => 'Questions',
+        'action' => 'index',
+        'survey_id' => $questionOption->question->survey_id,
+    ]);
+    $this->Breadcrumbs->add($this->Text->truncate($questionOption->question->questions, 10), [
+        'controller' => 'Questions',
+        'action' => 'index',
+        'survey_id' => $questionOption->question->survey_id,
+    ], [
+        'data-title' => $questionOption->question->questions,
+    ]);
+endif;
+
 $this->Breadcrumbs
     ->add(__d('croogo', 'Question Options'), ['action' => 'index']);
 
     $this->Breadcrumbs->add($questionOption->id, $this->request->here());
 
 $this->append('action-buttons');
-    echo $this->Croogo->adminAction(__('Edit Question Option'), ['action' => 'edit', $questionOption->id]);
-    echo $this->Croogo->adminAction(__('Delete Question Option'), ['action' => 'delete', $questionOption->id], ['confirm' => __('Are you sure you want to delete # {0}?', $questionOption->id)]);
-    echo $this->Croogo->adminAction(__('List Question Options'), ['action' => 'index']);
-    echo $this->Croogo->adminAction(__('New Question Option'), ['action' => 'add']);
-        echo $this->Croogo->adminAction(__('List Questions'), ['controller' => 'Questions', 'action' => 'index']);
-        echo $this->Croogo->adminAction(__('New Question'), ['controller' => 'Questions', 'action' => 'add']);
+    echo $this->Croogo->adminAction(__('Edit'), ['action' => 'edit', $questionOption->id]);
+    echo $this->Croogo->adminAction(__('Delete'), ['action' => 'delete', $questionOption->id], ['confirm' => __('Are you sure you want to delete # {0}?', $questionOption->id)]);
+    echo $this->Croogo->adminAction(__('List'), ['action' => 'index']);
+    echo $this->Croogo->adminAction(__('New'), ['action' => 'add']);
 $this->end();
 
 $this->append('main');
@@ -22,7 +45,7 @@ $this->append('main');
     <table class="table vertical-table">
         <tr>
             <th scope="row"><?= __('Question') ?></th>
-            <td><?= $questionOption->has('question') ? $this->Html->link($questionOption->question->id, ['controller' => 'Questions', 'action' => 'view', $questionOption->question->id]) : '' ?></td>
+            <td><?= $questionOption->has('question') ? $this->Html->link($questionOption->question->questions, ['controller' => 'Questions', 'action' => 'view', $questionOption->question->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Options') ?></th>

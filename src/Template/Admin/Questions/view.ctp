@@ -90,7 +90,7 @@ $this->append('main');
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'QuestionOptions', 'action' => 'view', $questionOptions->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'QuestionOptions', 'action' => 'edit', $questionOptions->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'QuestionOptions', 'action' => 'delete', $questionOptions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $questionOptions->id)]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'QuestionOptions', 'action' => 'delete', $questionOptions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $questionOptions->id), 'escape' => true]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
