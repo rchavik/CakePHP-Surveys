@@ -32,7 +32,7 @@ $this->append('table-heading');
         <th scope="col"><?= $this->Paginator->sort('questions') ?></th>
         <th scope="col"><?= $this->Paginator->sort('total_sequence') ?></th>
         <th scope="col"><?= $this->Paginator->sort('weight') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('required') ?></th>
         <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
         <th scope="col" class="actions"><?= __('Actions') ?></th>
     </tr>
@@ -53,7 +53,7 @@ $this->append('table-body');
         <td><?= h($question->questions) ?></td>
         <td><?= $this->Number->format($question->total_sequence) ?></td>
         <td><?= $this->Number->format($question->weight) ?></td>
-        <td><?= h($question->created) ?></td>
+        <td><?= $question->required ? 'Yes' : 'No' ?></td>
         <td><?= h($question->modified) ?></td>
 <?php
         $actions[] = $this->Croogo->adminRowActions($question->id);

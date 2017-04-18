@@ -25,7 +25,7 @@ class SurveysTable extends Table {
             ->contain([
                 'Questions' => [
                     'fields' => [
-                        'id', 'survey_id', 'type', 'questions', 'weight',
+                        'id', 'survey_id', 'type', 'questions', 'weight', 'required',
                     ],
                 ],
                 'Questions.QuestionOptions' => [

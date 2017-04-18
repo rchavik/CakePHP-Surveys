@@ -61,6 +61,7 @@ $this->append('tab-content');
             ],
         ]);
         echo $this->Form->input('questions');
+        echo $this->Form->input('required');
     echo $this->Html->tabEnd();
     echo $this->Croogo->adminTabs();
 $this->end();

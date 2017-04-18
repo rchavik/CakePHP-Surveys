@@ -29,6 +29,11 @@ class SurveyHelper extends Helper {
                 'div' => 'questions-radio',
                 'options' => $value,
             ];
+
+            if ($question->required) {
+                $options['required'] = true;
+                $options['data-parsley-error-message'] = __d('Surveys', 'Please choose an option');
+            }
         }
 
         if ($question->type == 'checkbox') {
@@ -39,12 +44,21 @@ class SurveyHelper extends Helper {
                 'multiple' => 'checkbox',
                 'options' => $value,
             );
+
+            if ($question->required) {
+                $options['required'] = true;
+                $options['data-parsley-error-message'] = __d('Surveys', 'Please select one answer');
+            }
         }
 
         if ($question->type == 'essay') {
-            $options = array(
+            $options = [
                 'label' => $question->questions,
-            );
+            ];
+            if ($question->required) {
+                $options['required'] = true;
+                $options['data-parsley-error-message'] = __d('Surveys', 'Please provide an answer');
+            }
         }
 
         $userId = $this->request->session()->read('Auth.User.id');

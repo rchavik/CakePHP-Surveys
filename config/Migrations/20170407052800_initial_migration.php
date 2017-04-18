@@ -34,6 +34,9 @@ class InitialMigration extends AbstractMigration
 			->addColumn('weight', 'integer', [
 				'null' => false, 'default' => NULL, 'length' => 10
 			])
+			->addColumn('required', 'boolean', [
+				'null' => false, 'default' => true,
+			])
 			->addColumn('created', 'datetime', [
 				'null' => true, 'default' => NULL,
 			])
