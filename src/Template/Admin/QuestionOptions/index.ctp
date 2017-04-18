@@ -11,7 +11,7 @@ if (isset($survey)):
     $this->Breadcrumbs->add(__('Surveys'), [
         'controller' => 'Surveys', 'action' => 'index',
     ]);
-    $this->Breadcrumbs->add($survey->title, [
+    $this->Breadcrumbs->add($this->Text->truncate($survey->title, 20), [
         'controller' => 'Questions',
         'action' => 'index',
         'survey_id' => $survey->id,
@@ -19,7 +19,7 @@ if (isset($survey)):
 endif;
 
 if (isset($question)):
-    $this->Breadcrumbs->add($question->questions, [
+    $this->Breadcrumbs->add($this->Text->truncate($question->questions, 20), [
         'controller' => 'Questions', 'action' => 'view', $question->id,
     ]);
     $addUrl['question_id'] = $question->id;

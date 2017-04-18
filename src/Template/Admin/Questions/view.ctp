@@ -20,9 +20,9 @@ $this->Breadcrumbs
     $this->Breadcrumbs->add($question->id, $this->request->here());
 
 $this->append('action-buttons');
-    echo $this->Croogo->adminAction(__('Edit Question'), ['action' => 'edit', $question->id]);
-    echo $this->Croogo->adminAction(__('Delete Question'), ['action' => 'delete', $question->id], ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]);
-    echo $this->Croogo->adminAction(__('New Question'), $addUrl);
+    echo $this->Croogo->adminAction(__('Edit'), ['action' => 'edit', $question->id]);
+    echo $this->Croogo->adminAction(__('Delete'), ['action' => 'delete', $question->id], ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]);
+    echo $this->Croogo->adminAction(__('New'), $addUrl);
 $this->end();
 
 $this->append('main');
