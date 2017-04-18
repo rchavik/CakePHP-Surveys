@@ -67,9 +67,10 @@ $this->append('main');
         <table class="table table-sm table-responsive">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Question Id') ?></th>
                 <th scope="col"><?= __('Submission Id') ?></th>
+                <th scope="col"><?= __('Question Id') ?></th>
                 <th scope="col"><?= __('Sequence Id') ?></th>
+                <th scope="col"><?= __('Question') ?></th>
                 <th scope="col"><?= __('Value') ?></th>
                 <th scope="col"><?= __('Text') ?></th>
                 <th scope="col"><?= __('Point') ?></th>
@@ -78,9 +79,10 @@ $this->append('main');
             <?php foreach ($submission->submission_details as $submissionDetails): ?>
             <tr>
                 <td><?= h($submissionDetails->id) ?></td>
-                <td><?= h($submissionDetails->question_id) ?></td>
                 <td><?= h($submissionDetails->submission_id) ?></td>
+                <td><?= h($submissionDetails->question_id) ?></td>
                 <td><?= h($submissionDetails->sequence_id) ?></td>
+                <td><?= h($submissionDetails->question->questions) ?></td>
                 <td><?= h($submissionDetails->value) ?></td>
                 <td><?= h($submissionDetails->text) ?></td>
                 <td><?= h($submissionDetails->point) ?></td>
