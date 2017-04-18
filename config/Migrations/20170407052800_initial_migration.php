@@ -83,7 +83,7 @@ class InitialMigration extends AbstractMigration
 				'null' => false, 'default' => NULL
 			])
 			->addColumn('text', 'text', [
-				'null' => false, 'default' => NULL
+				'null' => true, 'default' => NULL
 			])
 			->addColumn('point', 'integer', [
 				'null' => true, 'default' => NULL
