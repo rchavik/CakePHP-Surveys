@@ -61,6 +61,17 @@ class SurveyHelper extends Helper {
             }
         }
 
+        if ($question->type == 'rate') {
+            $options = [
+                'label' => $question->questions,
+                'class' => 'form-control rating',
+            ];
+            if ($question->required) {
+                $options['required'] = true;
+                $options['data-parsley-error-message'] = __d('Surveys', 'Please rate accordingly');
+            }
+        }
+
         $userId = $this->request->session()->read('Auth.User.id');
         $userId = $userId ?: 1; // uniqid();
         $out = $this->Form->input('user_id', [
