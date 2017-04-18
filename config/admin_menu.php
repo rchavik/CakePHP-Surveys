@@ -3,7 +3,7 @@
 use Croogo\Core\Nav;
 
 Nav::add('sidebar', 'survey', [
-    'icon' => 'question',
+    'icon' => 'list-ol',
     'title' => __d('croogo', 'Survey'),
     'url' => '#',
     'children' => [

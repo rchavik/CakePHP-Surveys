@@ -38,6 +38,31 @@ class SubmissionsController extends CroogoController
                         $this->Submissions->aliasField('id') => 'desc',
                     ]);
             }
+            if ($this->request->query('export')) {
+                $event->subject()->query
+                    ->contain([
+                        'SubmissionDetails' => [
+                            'sort' => [
+                                'sequence_id' => 'asc',
+                            ],
+                        ],
+                    ]);
+            }
+        });
+
+        $this->Crud->on('afterPaginate', function(Event $event) {
+            if (!$this->request->query('export') || !$this->request->query('survey_id')) {
+                return;
+            }
+            $this->viewBuilder()->className('CsvView.Csv');
+            $this->response->download('export.csv');
+            $submissions = $event->subject()->entities;
+            $questions = $this->Submissions->Surveys->Questions->find()
+                ->where(['survey_id' => $this->request->query('survey_id')])
+                ->order(['weight' => 'asc']);
+            $_serialize = null;
+            $_delimiter = "\t";
+            $this->set(compact('submissions', '_delimiter', 'questions'));
         });
 
         if ($surveyId = $this->request->query('survey_id')) {

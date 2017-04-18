@@ -4,12 +4,20 @@ $this->extend('Croogo/Core./Common/admin_index');
 
 if (isset($survey)):
     $this->Breadcrumbs->add(__('Surveys'), ['controller' => 'Surveys', 'action' => 'index']);
-    $this->Breadcrumbs->add($survey->title, ['controller' => 'Surveys', 'action' => 'view', 'survey_id' => $survey->id]);
+    $this->Breadcrumbs->add($survey->title, ['controller' => 'Surveys', 'action' => 'view', $survey->id]);
 endif;
 
 $this->Breadcrumbs->add(__('Submissions'), ['action' => 'index']);
 
-$this->set('showActions', false);
+if ($this->request->query('survey_id')):
+    $this->append('action-buttons');
+        echo $this->Croogo->adminAction('Export', array_merge(
+            $this->request->query, ['export' => true]
+        ));
+    $this->end();
+else:
+    $this->set('showActions', false);
+endif;
 
 $this->append('table-heading');
 ?>
