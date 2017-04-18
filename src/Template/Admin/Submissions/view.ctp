@@ -1,6 +1,7 @@
 <?php
 
 $this->extend('Croogo/Core./Common/admin_view');
+$this->Croogo->adminScript('Surveys.admin');
 
 $this->Breadcrumbs
     ->add(__d('croogo', 'Submissions'), ['action' => 'index']);
@@ -10,6 +11,11 @@ $this->Breadcrumbs
 $this->append('action-buttons');
     echo $this->Croogo->adminAction(__('List Submissions'), ['action' => 'index']);
 $this->end();
+
+$this->append('page-footer', $this->element('Croogo/Core.admin/modal', array(
+    'id' => 'survey-modal',
+    'class' => 'hide',
+)));
 
 $this->append('main');
 ?>
@@ -48,12 +54,21 @@ $this->append('main');
         <label>
             <strong><?= __('Raw Data') ?></strong>
         </label>
-        <?= $this->Text->autoParagraph(h($submission->raw_data)); ?>
+        <p>
+        <?=
+            $this->Html->link('View', '#', [
+                'class' => 'survey-view',
+                'data-title' => 'View Raw Data',
+                'data-content' => print_r(json_decode($submission->raw_data, true), true),
+                'escape' => true,
+            ]);
+        ?>
+        </p>
     </div>
     <div class="related">
         <h4><?= __('Related Submission Details') ?></h4>
         <?php if (!empty($submission->submission_details)): ?>
-        <table class="table table-sm">
+        <table class="table table-sm table-responsive">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Question Id') ?></th>
@@ -63,8 +78,6 @@ $this->append('main');
                 <th scope="col"><?= __('Text') ?></th>
                 <th scope="col"><?= __('Point') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($submission->submission_details as $submissionDetails): ?>
             <tr>
@@ -76,12 +89,6 @@ $this->append('main');
                 <td><?= h($submissionDetails->text) ?></td>
                 <td><?= h($submissionDetails->point) ?></td>
                 <td><?= h($submissionDetails->created) ?></td>
-                <td><?= h($submissionDetails->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'SubmissionDetails', 'action' => 'view', $submissionDetails->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'SubmissionDetails', 'action' => 'edit', $submissionDetails->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'SubmissionDetails', 'action' => 'delete', $submissionDetails->id], ['confirm' => __('Are you sure you want to delete # {0}?', $submissionDetails->id)]) ?>
-                </td>
             </tr>
             <?php endforeach; ?>
         </table>
