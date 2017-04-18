@@ -23,6 +23,9 @@ class SubmissionsTable extends Table {
         if (empty($data['raw_data'])) {
             $data['raw_data'] = json_encode($data);
         }
+        if (empty($data['status'])) {
+            $data['status'] = true;
+        }
         if (!empty($data['submission_details'])) {
             foreach ($data['submission_details'] as &$detail) {
                 if (is_array($detail['value'])) {

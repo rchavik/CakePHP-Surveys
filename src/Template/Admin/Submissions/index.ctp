@@ -14,7 +14,6 @@ $this->append('table-heading');
         <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
         <th scope="col"><?= $this->Paginator->sort('point') ?></th>
         <th scope="col"><?= $this->Paginator->sort('status') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('valid') ?></th>
         <th scope="col"><?= $this->Paginator->sort('created') ?></th>
         <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
         <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -34,7 +33,6 @@ $this->append('table-body');
         <td><?= $submission->has('user') ? $this->Html->link($submission->user->name, ['controller' => 'Users', 'action' => 'view', $submission->user->id]) : '' ?></td>
         <td><?= $this->Number->format($submission->point) ?></td>
         <td><?= h($submission->status) ?></td>
-        <td><?= h($submission->valid) ?></td>
         <td><?= h($submission->created) ?></td>
         <td><?= h($submission->modified) ?></td>
 <?php

@@ -59,9 +59,6 @@ class InitialMigration extends AbstractMigration
 				'null' => true, 'default' => NULL, 'length' => 10
 			])
 			->addColumn('status', 'boolean', [
-				'null' => true, 'default' => false
-			])
-			->addColumn('valid', 'boolean', [
 				'null' => true, 'default' => true
 			])
 			->addColumn('created', 'datetime', [

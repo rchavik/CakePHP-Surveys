@@ -45,10 +45,6 @@ $this->append('main');
             <th scope="row"><?= __('Status') ?></th>
             <td><?= $submission->status ? __('Yes') : __('No'); ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Valid') ?></th>
-            <td><?= $submission->valid ? __('Yes') : __('No'); ?></td>
-        </tr>
     </table>
     <div>
         <label>
