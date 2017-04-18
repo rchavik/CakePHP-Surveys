@@ -17,6 +17,10 @@ class SubmissionsTable extends Table {
         $this->belongsTo('Users');
         $this->belongsTo('Surveys.Surveys');
         $this->hasMany('Surveys.SubmissionDetails');
+
+        $this->searchManager()
+            ->value('survey_id')
+            ->value('user_id');
     }
 
     public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options) {

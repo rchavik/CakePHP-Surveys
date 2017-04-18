@@ -13,12 +13,24 @@ use Croogo\Core\Controller\Admin\AppController as CroogoController;
 class SubmissionsController extends CroogoController
 {
 
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->Crud->config('actions.index', [
+            'searchFields' => ['survey_id', 'user_id'],
+        ]);
+
+        $this->_setupPrg();
+    }
+
     /**
      * Index method
      */
     public function index()
     {
         $this->Crud->listener('relatedModels')->relatedModels(true);
+
         return $this->Crud->execute();
     }
 

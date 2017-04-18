@@ -28,5 +28,15 @@ Nav::add('sidebar', 'survey', [
             ]
         ],
 
+        'submissions' => [
+            'title' => 'Submissions',
+            'url' => [
+                'prefix' => 'admin',
+                'plugin' => 'Surveys',
+                'controller' => 'Submissions',
+                'action' => 'index',
+            ]
+        ],
+
     ],
 ]);
