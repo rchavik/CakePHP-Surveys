@@ -1,6 +1,12 @@
 <?php
 
 $this->extend('Croogo/Core./Common/admin_index');
+
+if (isset($survey)):
+    $this->Breadcrumbs->add(__('Surveys'), ['controller' => 'Surveys', 'action' => 'index']);
+    $this->Breadcrumbs->add($survey->title, ['controller' => 'Surveys', 'action' => 'view', 'survey_id' => $survey->id]);
+endif;
+
 $this->Breadcrumbs->add(__('Submissions'), ['action' => 'index']);
 
 $this->set('showActions', false);
@@ -29,7 +35,16 @@ $this->append('table-body');
         <?php $actions = []; ?>
     <tr>
         <td><?= $this->Number->format($submission->id) ?></td>
-        <td><?= $submission->has('survey') ? $this->Html->link($submission->survey->title, ['controller' => 'Surveys', 'action' => 'view', $submission->survey->id]) : '' ?></td>
+        <td>
+            <?= $submission->has('survey') ? $this->Html->link($submission->survey->title, ['controller' => 'Surveys', 'action' => 'view', $submission->survey->id]) : '' ?>
+
+            <?= $submission->has('survey') && ($this->request->query('survey_id') != $submission->survey->id) ?
+            $this->Html->link(
+                '<i class="fa fa-filter"></i>', [
+                'controller' => 'Submissions', 'action' => 'index',
+                'survey_id' => $submission->survey->id], ['escapeTitle' => false]) : ''
+            ?>
+        </td>
         <td><?= $submission->has('user') ? $this->Html->link($submission->user->name, ['controller' => 'Users', 'action' => 'view', $submission->user->id]) : '' ?></td>
         <td><?= $this->Number->format($submission->point) ?></td>
         <td><?= h($submission->status) ?></td>

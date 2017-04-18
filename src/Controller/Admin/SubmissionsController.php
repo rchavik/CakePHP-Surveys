@@ -31,6 +31,19 @@ class SubmissionsController extends CroogoController
     {
         $this->Crud->listener('relatedModels')->relatedModels(true);
 
+        $this->Crud->on('beforePaginate', function(Event $event) {
+            if (!$this->request->query('sort')) {
+                $event->subject()->query
+                    ->order([
+                        $this->Submissions->aliasField('id') => 'desc',
+                    ]);
+            }
+        });
+
+        if ($surveyId = $this->request->query('survey_id')) {
+            $this->set('survey', $this->Submissions->Surveys->get($surveyId));
+        }
+
         return $this->Crud->execute();
     }
 
