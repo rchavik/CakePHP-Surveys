@@ -31,17 +31,17 @@ $action = $this->request->param('action');
 
 if ($action == 'edit'):
     $this->Breadcrumbs->add($question->id);
+    $this->append('action-buttons');
+        echo $this->Croogo->adminAction(__('Delete'),
+            ['action' => 'delete', $question->id],
+            ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]
+        );
+        echo $this->Croogo->adminAction(__('New Question Option'), $addUrl);
+    $this->end();
 else:
     $this->Breadcrumbs->add(__d('croogo', 'Add'), $this->request->here());
 endif;
 
-$this->append('action-buttons');
-    echo $this->Croogo->adminAction(__('Delete'),
-        ['action' => 'delete', $question->id],
-        ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]
-    );
-    echo $this->Croogo->adminAction(__('New Question Option'), $addUrl);
-$this->end();
 $this->append('form-start', $this->Form->create($question));
 
 $this->append('tab-heading');
