@@ -5,7 +5,12 @@ use Croogo\Core\Nav;
 Nav::add('sidebar', 'survey', [
     'icon' => 'list-ol',
     'title' => __d('croogo', 'Survey'),
-    'url' => '#',
+    'url' => [
+        'prefix' => 'admin',
+        'plugin' => 'Surveys',
+        'controller' => 'Surveys',
+        'action' => 'index',
+    ],
     'children' => [
 
         'survey' => [
