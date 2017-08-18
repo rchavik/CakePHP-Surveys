@@ -72,12 +72,8 @@ class SurveyHelper extends Helper {
             }
         }
 
-        $userId = $this->request->session()->read('Auth.User.id');
-        $userId = $userId ?: 1; // uniqid();
-        $out = $this->Form->input('user_id', [
-            'type' => 'hidden',
-            'value' => $userId,
-        ]);
+        $out = '';
+
         $out .= $this->Form->input($fieldQuestionId, [
             'type' => 'hidden',
             'value' => $question->id,
