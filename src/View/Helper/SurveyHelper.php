@@ -53,6 +53,7 @@ class SurveyHelper extends Helper {
 
         if ($question->type == 'essay') {
             $options = [
+                'type' => 'textarea',
                 'label' => $question->questions,
             ];
             if ($question->required) {
