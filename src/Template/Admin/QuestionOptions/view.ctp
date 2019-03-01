@@ -6,31 +6,21 @@ if ($questionOption->has('question') && $questionOption->question->has('survey')
     $this->Breadcrumbs->add('Surveys', [
         'controller' => 'Surveys',
     ]);
-    $this->Breadcrumbs->add($this->Text->truncate($questionOption->question->survey->title, 10), [
+    $this->Breadcrumbs->add($this->Text->truncate($questionOption->question->survey->title, 20), [
         'controller' => 'Surveys',
         'action' => 'view',
         $questionOption->question->survey_id,
     ], [
         'data-title' => $questionOption->question->survey->title,
     ]);
-    $this->Breadcrumbs->add('Questions', [
+    $this->Breadcrumbs->add($questionOption->question->questions, [
         'controller' => 'Questions',
-        'action' => 'index',
-        'survey_id' => $questionOption->question->survey_id,
-    ]);
-    $this->Breadcrumbs->add($this->Text->truncate($questionOption->question->questions, 10), [
-        'controller' => 'Questions',
-        'action' => 'index',
-        'survey_id' => $questionOption->question->survey_id,
-    ], [
-        'data-title' => $questionOption->question->questions,
+        'action' => 'view',
+        $questionOption->question->id,
     ]);
 endif;
 
-$this->Breadcrumbs
-    ->add(__d('croogo', 'Question Options'), ['action' => 'index']);
-
-    $this->Breadcrumbs->add($questionOption->id, $this->request->here());
+$this->Breadcrumbs->add($questionOption->options, $this->request->here());
 
 $this->append('action-buttons');
     echo $this->Croogo->adminAction(__('Edit'), ['action' => 'edit', $questionOption->id]);

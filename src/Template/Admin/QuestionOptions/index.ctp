@@ -37,7 +37,6 @@ $this->append('table-heading');
     <tr>
         <th scope="col"><?= $this->Paginator->sort('id') ?></th>
         <th scope="col"><?= $this->Paginator->sort('question_id') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('sequence_id') ?></th>
         <th scope="col"><?= $this->Paginator->sort('options') ?></th>
         <th scope="col"><?= $this->Paginator->sort('weight') ?></th>
         <th scope="col"><?= $this->Paginator->sort('point') ?></th>
@@ -58,7 +57,6 @@ $this->append('table-body');
     <tr>
         <td><?= $this->Number->format($questionOption->id) ?></td>
         <td><?= $questionOption->has('question') ? $this->Html->link($questionOption->question->questions, ['controller' => 'Questions', 'action' => 'view', $questionOption->question->id]) : '' ?></td>
-        <td><?= $this->Number->format($questionOption->sequence_id) ?></td>
         <td><?= h($questionOption->options) ?></td>
         <td><?= $this->Number->format($questionOption->weight) ?></td>
         <td><?= $this->Number->format($questionOption->point) ?></td>
@@ -83,7 +81,13 @@ $this->append('table-body');
             'method' => 'post',
         ]);
         $actions[] = $this->Croogo->adminRowAction('', ['action' => 'view', $questionOption->id], ['icon' => 'read']);
-        $actions[] = $this->Croogo->adminRowAction('', ['action' => 'edit', $questionOption->id], ['icon' => 'update']);
+        $actions[] = $this->Croogo->adminRowAction('', [
+            'action' => 'edit', $questionOption->id,
+            '?' => [
+                'survey_id' => empty($survey) ? null : $survey->id,
+                'question_id' => empty($question) ? null : $question->id,
+            ],
+        ], ['icon' => 'update']);
         $actions[] = $this->Croogo->adminRowAction('', ['action' => 'delete', $questionOption->id], ['icon' => 'delete']);
 ?>
         <td class="actions">

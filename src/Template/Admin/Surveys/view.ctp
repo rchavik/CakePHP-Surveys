@@ -49,7 +49,16 @@ $this->append('main');
             </tr>
             <?php foreach ($survey->questions as $question): ?>
             <tr>
-                <td><?= h($question->questions) ?></td>
+                <td>
+                <?=
+                $this->Html->link($question->questions, [
+                    'prefix' => 'admin',
+                    'controller' => 'Questions',
+                    'action' => 'view',
+                    $question->id,
+                ])
+                ?>
+                </td>
                 <td><?= h($question->type) ?></td>
                 <td><?= h($question->weight) ?></td>
                 <td>

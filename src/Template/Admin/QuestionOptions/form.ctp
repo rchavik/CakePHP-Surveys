@@ -7,6 +7,25 @@
 
 $this->extend('Croogo/Core./Common/admin_edit');
 
+if (!empty($survey)):
+    $this->Breadcrumbs->add($survey['title'], [
+        'prefix' => 'admin',
+        'controller' => 'Surveys',
+        'action' => 'view',
+        $survey->id,
+    ]);
+endif;
+
+$questionId = $this->request->query('question_id');
+if (!empty($questionId)):
+    $this->Breadcrumbs->add($questions[$questionId], [
+        'prefix' => 'admin',
+        'controller' => 'Questions',
+        'action' => 'view',
+        $questionId,
+    ]);
+endif;
+
 $this->Breadcrumbs->add(__('Question Options'), ['action' => 'index']);
 $action = $this->request->param('action');
 
@@ -37,6 +56,11 @@ $this->append('tab-content');
     echo $this->Html->tabStart('question-option');
         echo $this->Form->input('question_id', ['options' => $questions, 'empty' => true]);
         echo $this->Form->input('options');
+
+        if (!$questionOption->isNew()):
+            echo $this->Form->input('weight');
+        endif;
+
         echo $this->Form->input('point', [
             'default' => 1,
         ]);

@@ -99,6 +99,14 @@ class QuestionOptionsController extends CroogoController
      */
     public function edit($id = null)
     {
+        $this->Crud->listener('relatedModels')->relatedModels(true);
+
+        $surveyId = $this->request->query('survey_id');
+        if ($surveyId) {
+            $survey = $this->QuestionOptions->Questions->Surveys->get($surveyId);
+        }
+
+        $this->set(compact('survey', 'question'));
         return $this->Crud->execute();
     }
 
