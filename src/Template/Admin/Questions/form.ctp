@@ -60,6 +60,14 @@ $this->append('tab-content');
                 'checkbox' => 'Checkbox',
             ],
         ]);
+        echo $this->Form->input('pivot_type', [
+            'default' => null,
+            'options' => [
+                0 => 'Row',
+                1 => 'Columns',
+            ],
+            'empty' => true,
+        ]);
         echo $this->Form->input('short_description');
         echo $this->Form->input('questions', [
             'type' => 'textarea',

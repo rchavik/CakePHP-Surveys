@@ -14,6 +14,10 @@ class AddShortDescription extends AbstractMigration
                 'null' => false, 'length' => 50,
                 'after' => 'questions',
             ])
+            ->addColumn('pivot_type', 'integer', [
+                'null' => true,
+                'after' => 'short_description',
+            ])
             ->update();
     }
 
@@ -25,6 +29,7 @@ class AddShortDescription extends AbstractMigration
                 'null' => false, 'length' => 255,
             ])
             ->removeColumn('short_description')
+            ->removeColumn('pivot_type')
             ->update();
     }
 }
