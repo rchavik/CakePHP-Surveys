@@ -61,6 +61,18 @@ $this->append('main');
     </table>
     <div class="related">
         <h4><?= __('Related Question Options') ?></h4>
+
+        <div class="pull-right">
+        <?=
+            $this->Html->link(__('Add Question Options'), [
+                'controller' => 'QuestionOptions', 'action' => 'add',
+                '?' => [
+                    'question_id' => $question->id,
+                ],
+            ])
+        ?>
+        </div>
+
         <?php if (!empty($question->question_options)): ?>
         <table class="table table-sm">
             <tr>

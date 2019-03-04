@@ -7,18 +7,20 @@
 
 $this->extend('Croogo/Core./Common/admin_edit');
 
+$surveyId = null;
 if (!empty($survey)):
+    $surveyId = $survey->id;
     $this->Breadcrumbs->add($survey['title'], [
         'prefix' => 'admin',
         'controller' => 'Surveys',
         'action' => 'view',
-        $survey->id,
+        $surveyId,
     ]);
 endif;
 
 $questionId = $this->request->query('question_id');
 if (!empty($questionId)):
-    $this->Breadcrumbs->add($questions[$questionId], [
+    $this->Breadcrumbs->add($this->Text->truncate($questions[$questionId], 20), [
         'prefix' => 'admin',
         'controller' => 'Questions',
         'action' => 'view',
@@ -26,7 +28,13 @@ if (!empty($questionId)):
     ]);
 endif;
 
-$this->Breadcrumbs->add(__('Question Options'), ['action' => 'index']);
+$this->Breadcrumbs->add(__('Question Options'), [
+    'action' => 'index',
+    '?' => [
+        'survey_id' => $surveyId,
+        'question_id' => $questionId,
+    ],
+]);
 $action = $this->request->param('action');
 
 if ($action == 'edit'):
@@ -40,11 +48,17 @@ $this->append('action-buttons');
         ['action' => 'delete', $questionOption->id],
         ['confirm' => __('Are you sure you want to delete # {0}?', $questionOption->id)]
     );
-    echo $this->Croogo->adminAction(__('List Question Options'),
-        ['action' => 'index']
-    );
-    echo $this->Croogo->adminAction(__('List Questions'), ['controller' => 'Questions', 'action' => 'index']);
-    echo $this->Croogo->adminAction(__('New Question'), ['controller' => 'Questions', 'action' => 'add']);
+    echo $this->Croogo->adminAction(__('List Question Options'), [
+        'action' => 'index',
+        '?' => [
+            'question_id' => $questionId,
+        ]
+    ]);
+    echo $this->Croogo->adminAction(__('New Question Option'), ['controller' => 'QuestionOptions', 'action' => 'add',
+        '?' => [
+            'question_id' => $questionId,
+        ]
+    ]);
 $this->end();
 $this->append('form-start', $this->Form->create($questionOption));
 

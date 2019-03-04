@@ -60,8 +60,10 @@ $this->append('tab-content');
                 'checkbox' => 'Checkbox',
             ],
         ]);
-        echo $this->Form->input('questions');
-        echo $this->Form->input('required');
+        echo $this->Form->input('short_description');
+        echo $this->Form->input('questions', [
+            'type' => 'textarea',
+        ]);
     echo $this->Html->tabEnd();
     echo $this->Croogo->adminTabs();
 $this->end();
