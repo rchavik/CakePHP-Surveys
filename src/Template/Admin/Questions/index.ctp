@@ -50,7 +50,16 @@ $this->append('table-body');
         <td><?= $this->Number->format($question->id) ?></td>
         <td><?= $question->has('survey') ? $this->Html->link($question->survey->title, ['controller' => 'Surveys', 'action' => 'view', $question->survey->id]) : '' ?></td>
         <td><?= h($question->type) ?></td>
-        <td><?= h($question->questions) ?></td>
+        <td>
+            <?=
+                $this->Html->link($question->short_description, 'javascript:void(0)', [
+                    'class' => 'popovers action',
+                    'data-title' => $question->short_description,
+                    'data-content' => $question->questions,
+                ])
+            ?>
+            </a>
+        </td>
         <td><?= $this->Number->format($question->total_sequence) ?></td>
         <td><?= $this->Number->format($question->weight) ?></td>
         <td><?= $question->required ? 'Yes' : 'No' ?></td>
@@ -89,5 +98,7 @@ $this->append('table-body');
 <?php
 
 $this->end();
+
+$this->Js->buffer("$('.popovers').popover()");
 
 ?>
