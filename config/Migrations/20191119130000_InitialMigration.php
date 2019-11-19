@@ -39,6 +39,10 @@ class InitialMigration extends AbstractMigration
                 'null' => false, 'default' => true,
             ])
             ->addTimestamps('created', 'modified')
+            ->addForeignKey('survey_id', 'surveys', ['id'], [
+                'constraint' => 'fk_questions2surveys',
+                'delete' => 'RESTRICT',
+            ])
             ->create();
 
         $this->table('submissions')
@@ -58,6 +62,10 @@ class InitialMigration extends AbstractMigration
                 'null' => true, 'default' => true
             ])
             ->addTimestamps('created', 'modified')
+            ->addForeignKey('survey_id', 'surveys', ['id'], [
+                'constraint' => 'fk_submissions2surveys',
+                'delete' => 'RESTRICT',
+            ])
             ->create();
 
         $this->table('submission_details')
@@ -80,6 +88,14 @@ class InitialMigration extends AbstractMigration
                 'null' => true, 'default' => NULL
             ])
             ->addTimestamps('created', 'modified')
+            ->addForeignKey('submission_id', 'submissions', ['id'], [
+                'constraint' => 'fk_submission_details2submissions',
+                'delete' => 'RESTRICT',
+            ])
+            ->addForeignKey('question_id', 'questions', ['id'], [
+                'constraint' => 'fk_submission_details2questions',
+                'delete' => 'RESTRICT',
+            ])
             ->create();
 
         $this->table('question_options')
@@ -99,6 +115,10 @@ class InitialMigration extends AbstractMigration
                 'null' => true, 'default' => NULL
             ])
             ->addTimestamps('created', 'modified')
+            ->addForeignKey('question_id', 'questions', ['id'], [
+                'constraint' => 'fk_question_options2questions',
+                'delete' => 'RESTRICT',
+            ])
             ->create();
     }
 
