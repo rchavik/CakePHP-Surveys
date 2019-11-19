@@ -18,7 +18,6 @@ class SurveysTable extends Table {
     public function findSurveyQuestions(Query $query, array $options)
     {
         return $query
-            ->select(['id', 'title'])
             ->where([
                 $this->aliasField('id') => $options['id'],
             ])
