@@ -46,7 +46,7 @@ class SurveyHelper extends Helper {
             );
 
             if ($question->required) {
-                $options['required'] = true;
+                $options['data-parsley-required'] = true;
                 $options['data-parsley-error-message'] = __d('Surveys', 'Please select one answer');
             }
         }
@@ -93,6 +93,10 @@ class SurveyHelper extends Helper {
         $out .= $this->Form->input('survey_id', [
             'type' => 'hidden',
             'value' => $survey->id,
+        ]);
+        $out .= $this->Form->input('user_id', [
+            'type' => 'hidden',
+            'value' => $this->request->session()->read('Auth.User.id'),
         ]);
         $questions = [];
         foreach ($survey->questions as $i => $question) {
