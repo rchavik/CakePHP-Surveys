@@ -11,6 +11,7 @@ class SubmissionDetailsTable extends Table {
         parent::initialize($config);
         $this->addBehavior('Timestamp');
         $this->addBehavior('Search.Search');
+        $this->addBehavior('Croogo/Core.Trackable');
 
         $this->belongsTo('Surveys.Questions');
         $this->belongsTo('Surveys.Submissions');

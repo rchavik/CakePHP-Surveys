@@ -12,6 +12,7 @@ class SubmissionsTable extends Table {
     {
         parent::initialize($config);
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Croogo/Core.Trackable');
         $this->addBehavior('Search.Search');
         $this->addBehavior('Surveys.DataParser');
         $this->belongsTo('Users');
