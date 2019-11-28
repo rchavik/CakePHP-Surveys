@@ -15,13 +15,13 @@ class InitialMigration extends AbstractMigration
 
         $this->table('questions')
             ->addColumn('survey_id', 'integer', [
-                'null' => false, 'default' => NULL, 'length' => 10
+                'null' => false,
             ])
             ->addColumn('type', 'string', [
-                'null' => false, 'default' => NULL, 'length' => 50,
+                'null' => false, 'length' => 50,
             ])
             ->addColumn('questions', 'string', [
-                'null' => false, 'default' => NULL, 'length' => 1024,
+                'null' => false, 'length' => 1024,
             ])
             ->addColumn('short_description', 'string', [
                 'null' => false, 'length' => 50,
@@ -33,7 +33,7 @@ class InitialMigration extends AbstractMigration
                 'null' => true, 'default' => NULL,
             ])
             ->addColumn('weight', 'integer', [
-                'null' => false, 'default' => NULL, 'length' => 10
+                'null' => false, 'default' => NULL,
             ])
             ->addColumn('required', 'boolean', [
                 'null' => false, 'default' => true,
@@ -47,16 +47,16 @@ class InitialMigration extends AbstractMigration
 
         $this->table('submissions')
             ->addColumn('survey_id', 'integer', [
-                'null' => false, 'default' => NULL, 'length' => 10
+                'null' => false,
             ])
             ->addColumn('user_id', 'integer', [
-                'null' => false, 'default' => NULL, 'length' => 10,
+                'null' => true, 'default' => NULL,
             ])
             ->addColumn('raw_data', 'text', [
-                'null' => false, 'default' => NULL,
+                'null' => false,
             ])
             ->addColumn('point', 'integer', [
-                'null' => true, 'default' => NULL, 'length' => 10
+                'null' => true, 'default' => NULL,
             ])
             ->addColumn('status', 'boolean', [
                 'null' => true, 'default' => true
