@@ -18,7 +18,7 @@ class QuestionsTable extends Table {
         $this->hasMany('Surveys.QuestionOptions');
         $this->belongsTo('Surveys.Surveys');
 
-        $this->setDisplayField('questions');
+        $this->setDisplayField('short_description');
 
         $this->searchManager()
             ->value('survey_id');

@@ -68,7 +68,9 @@ $this->append('tab-content');
             ],
             'empty' => true,
         ]);
-        echo $this->Form->input('short_description');
+        echo $this->Form->input('short_description', [
+            'required' => true,
+        ]);
         echo $this->Form->input('questions', [
             'type' => 'textarea',
         ]);
