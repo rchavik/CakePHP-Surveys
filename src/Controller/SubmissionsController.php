@@ -2,20 +2,34 @@
 
 namespace Surveys\Controller;
 
-use App\Controller\AppController as CroogoController;
+use Croogo\Core\Controller\AppController as CroogoController;
 use Cake\Event\Event;
+use Cake\Http\Exception\NotFoundException;
+use Cake\Utility\Text;
 
 class SubmissionsController extends CroogoController
 {
-
-    use \Cake\Log\LogTrait;
 
     public function initialize()
     {
         parent::initialize();
         $this->loadComponent('Crud.Crud');
 
-        $this->Crud->mapAction('add', 'Crud.Add');
+        $this->Crud->mapAction('add', [
+            'className' => 'Crud.Add',
+            'messages' => [
+                'success' => [
+                    'text' => __d('croogo', '{name} received successfully'),
+                    'params' => [
+                        'type' => 'success',
+                        'class' => 'alert alert-primary alert-dismissible',
+                    ],
+                ],
+                'error' => [
+                    'text' => __d('croogo', 'Failed processing {name}'),
+                ],
+            ],
+        ]);
     }
 
     public function add()
@@ -25,7 +39,9 @@ class SubmissionsController extends CroogoController
         ]);
 
         $this->Crud->on('beforeRedirect', function(Event $event) {
-            return $this->redirect(['action' => 'done']);
+            $nonce = Text::uuid();
+            $this->getRequest()->session()->write('Surveys.nonceDone', $nonce);
+            return $this->redirect(['action' => 'done', 'nonce' => $nonce]);
         });
 
         return $this->Crud->execute();
@@ -33,6 +49,14 @@ class SubmissionsController extends CroogoController
 
     public function done()
     {
+        $session = $this->getRequest()->session();
+        $nonce = $this->getRequest()->getQuery('nonce');
+
+        $saved = $session->read('Surveys.nonceDone');
+        if (!$saved || $nonce !== $saved) {
+            throw new NotFoundException();
+        }
+        $session->delete('Surveys.nonceDone');
     }
 
 }
