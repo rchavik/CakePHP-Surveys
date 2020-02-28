@@ -18,8 +18,8 @@ class DataParserBehavior extends Behavior  {
     }
 
     public function afterSave(&$Model, $created) {
-        if(isset($Model->data[$Model->alias]['raw_data'])) {
-            $rawdata = $Model->data[$Model->alias]['raw_data'];
+        if (isset($Model->data['raw_data'])) {
+            $rawdata = $Model->data['raw_data'];
             if ($created) {
                 return $this->_saveDetail($Model, $rawdata);
             }
